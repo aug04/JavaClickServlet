@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example.click</groupId>
-	<artifactId>ClickServlet</artifactId>
+	<artifactId>ad</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -51,7 +51,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>ClickServlet</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -65,7 +64,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<finalName>${artifactId}-${version}</finalName>
+					<finalName>${artifactId}</finalName>
 					<filters>
 						<filter>
 							<artifact>*:*</artifact>
