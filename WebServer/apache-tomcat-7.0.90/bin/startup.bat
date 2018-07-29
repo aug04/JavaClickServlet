@@ -20,6 +20,8 @@ rem ---------------------------------------------------------------------------
 
 setlocal
 
+set "JAVA_HOME"="C:\Program Files\Java\jdk1.7.0_79"
+
 rem Guess CATALINA_HOME if not defined
 set "CURRENT_DIR=%cd%"
 if not "%CATALINA_HOME%" == "" goto gotHome
