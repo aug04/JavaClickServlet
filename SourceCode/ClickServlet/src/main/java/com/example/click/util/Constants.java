@@ -1,7 +1,15 @@
 package com.example.click.util;
 
+/**
+ * Chứa tất cả các hằng số dùng chung cho toàn bộ ứng dụng
+ *
+ */
 public class Constants {
 
+	/**
+	 * Các trạng thái của Ads và Media
+	 *
+	 */
 	public static final class Status {
 		
 		public static final int ON = 1;
@@ -9,6 +17,10 @@ public class Constants {
 		public static final int DELETED = -1;
 	}
 	
+	/**
+	 * Trạng thái lỗi của DeliverLog
+	 *
+	 */
 	public static final class ErrorType {
 		
 		public static final int SUCCESS = 1;

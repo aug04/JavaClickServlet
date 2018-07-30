@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.example.click.dao.impl.AdsDaoImpl;
-import com.example.click.entities.Ads;
+import com.example.click.dao.impl.MediaDaoImpl;
+import com.example.click.entities.Media;
 import com.example.click.util.JdbcUtil;
 import com.example.click.util.Util;
 
-@WebServlet(urlPatterns = {"/adManagement"})
-public class AdsManagementServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/mediaManagement"})
+public class MediaManagementServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger _LOG = Logger.getLogger(AdsManagementServlet.class);
+	private static final Logger _LOG = Logger.getLogger(MediaManagementServlet.class);
 	private static final String MESSAGE = "message";
 	
-	AdsDaoImpl adsDao = new AdsDaoImpl();
+	MediaDaoImpl mediaDao = new MediaDaoImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,10 +35,9 @@ public class AdsManagementServlet extends HttpServlet {
 		
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
-		String url = req.getParameter("url");
 		String status = req.getParameter("status");
 		String actionType = req.getParameter("actionType");
-		Ads ad = null;
+		Media media = null;
 		
 		if (!Util.isNullOrEmpty(actionType) 
 				&& (actionType.equals("create") || actionType.equals("edit"))) {
@@ -47,12 +46,11 @@ public class AdsManagementServlet extends HttpServlet {
 				conn.setAutoCommit(false);
 				
 				if (Util.isNullOrEmpty(name) 
-						|| Util.isNullOrEmpty(url) 
 						|| Util.isNullOrEmpty(status))
 					req.setAttribute(MESSAGE, "Vui lòng điền đầy đủ thông tin trước khi ghi lại!");
 				else if (Util.isNullOrEmpty(id)) {  // Thêm mới nếu giá trị thuộc tính id null
-					ad = new Ads(0, name, Integer.valueOf(status), url);
-					int added = adsDao.create(ad, conn);
+					media = new Media(0, name, Integer.valueOf(status));
+					int added = mediaDao.create(media, conn);
 					
 					if (added > 0) {
 						req.setAttribute(MESSAGE, "Thêm mới thành công, dữ liệu đã được ghi vào CSDL.");
@@ -62,8 +60,8 @@ public class AdsManagementServlet extends HttpServlet {
 						conn.rollback();
 					}
 				} else {  // Cập nhật
-					ad = new Ads(Integer.valueOf(id), name, Integer.valueOf(status), url);
-					boolean updated = adsDao.update(ad, conn);
+					media = new Media(Integer.valueOf(id), name, Integer.valueOf(status));
+					boolean updated = mediaDao.update(media, conn);
 					
 					if (updated) {
 						req.setAttribute(MESSAGE, "Cập nhật thành công, dữ liệu đã được ghi vào CSDL.");
@@ -85,8 +83,8 @@ public class AdsManagementServlet extends HttpServlet {
 			}
 		}
 		
-		req.setAttribute("adsList", LoadDataServlet.adsList);
-		req.getRequestDispatcher("/adManagement.jsp").forward(req, resp);
+		req.setAttribute("mediaList", LoadDataServlet.mediaList);
+		req.getRequestDispatcher("/mediaManagement.jsp").forward(req, resp);
 	}
 
 	@Override

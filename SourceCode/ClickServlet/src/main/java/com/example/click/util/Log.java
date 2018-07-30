@@ -25,6 +25,12 @@ public class Log {
 		}
 	}
 	
+	/**
+	 * Ghi log ra file theo yêu cầu của đề bài
+	 * 
+	 * @param message thông điệp cần ghi
+	 * @param logFileName đường dẫn file log
+	 */
 	public synchronized static void  write(String message, String logFileName) {
 		try {
 			String path = "";
@@ -45,6 +51,9 @@ public class Log {
 			FileWriter fw = new FileWriter(path, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(message + "\r\n");
+			
+			fw.flush();
+			bw.flush();
 			fw.close();
 			bw.close();
 		} catch (Exception e) {

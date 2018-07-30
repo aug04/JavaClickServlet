@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -80,7 +81,35 @@ public class DeliverLogDaoImpl implements ClickServletDao<DeliverLog> {
 
 	@Override
 	public List<DeliverLog> getAll(Connection conn) {
-		// TODO Auto-generated method stub
+		try {
+			if (conn == null || conn.isClosed()) {
+				_LOG.error("#getAll(?, ?): kết nối null hoặc đang đóng!");
+				return null;
+			}
+			
+			pstmt = conn.prepareStatement("SELECT id, date, ad_id, media_id, user_agent, query_string, error_type, error_msg FROM deliver_log ORDER BY id DESC");
+			rs = pstmt.executeQuery();
+			List<DeliverLog> allResult = new ArrayList<DeliverLog>();
+			
+			DeliverLog deliverLog = null;
+			while (rs.next()) {
+				deliverLog = new DeliverLog(rs.getInt("id"), rs.getTimestamp("date"), rs.getInt("ad_id"), 
+						rs.getInt("media_id"), rs.getString("user_agent"), rs.getString("query_string"), rs.getInt("error_type"), rs.getString("error_msg"));
+				allResult.add(deliverLog);
+			}
+			
+			return allResult.isEmpty() ? null : allResult;
+		} catch (Exception e) {
+			_LOG.error("#getAll(?, ?): " + e);
+		} finally {
+			try {
+				pstmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				_LOG.error("#getAll(?, ?): " + e);
+			}
+		}
+		
 		return null;
 	}
 

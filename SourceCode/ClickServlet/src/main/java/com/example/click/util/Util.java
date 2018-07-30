@@ -6,6 +6,12 @@ import com.example.click.servlet.LoadDataServlet;
 
 public class Util {
 
+	/**
+	 * Lấy một đối tượng Ads từ bộ nhớ (lấy trong danh sách đã được tải lên bộ nhớ) theo ID
+	 * 
+	 * @param id
+	 * @return một đối tượng Ads nếu tìm thấy, ngược lại trả về null
+	 */
 	public static Ads getAdsFromMemoryById(int id) {
 
 		if (LoadDataServlet.adsList != null
@@ -20,6 +26,12 @@ public class Util {
 		return null;
 	}
 
+	/**
+	 * Lấy một đối tượng Media từ bộ nhớ (lấy trong danh sách đã được tải lên bộ nhớ) theo ID
+	 * 
+	 * @param id
+	 * @return một đối tượng Media nếu tìm thấy, ngược lại trả về null
+	 */
 	public static Media getMediaFromMemoryById(int id) {
 
 		if (LoadDataServlet.mediaList != null
@@ -32,5 +44,15 @@ public class Util {
 		}
 
 		return null;
+	}
+	
+	/**
+	 * Kiểm tra một chuỗi là null hoặc rỗng
+	 * 
+	 * @param str
+	 * @return một true nếu chuỗi đầu vào null hoặc rỗng, ngược lại trả về false
+	 */
+	public static boolean isNullOrEmpty(String str) {
+		return str == null || str.isEmpty();
 	}
 }
