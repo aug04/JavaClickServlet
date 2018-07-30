@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.example.click.dao.ClickServletDao;
 import com.example.click.entities.Ads;
+import com.mysql.jdbc.Statement;
 
 public class AdsDaoImpl implements ClickServletDao<Ads> {
 
@@ -23,11 +24,11 @@ public class AdsDaoImpl implements ClickServletDao<Ads> {
 	public int create(Ads obj, Connection conn) {
 		try {
 			if (conn == null || conn.isClosed()) {
-				_LOG.error("#create(?, ?): connection is null or not open!");
+				_LOG.error("#create(?, ?): kết nối null hoặc đang đóng!");
 				return 0;
 			}
 			
-			pstmt = conn.prepareStatement("INSERT INTO ads (name, status, url) VALUES (?, ?, ?)");
+			pstmt = conn.prepareStatement("INSERT INTO ads (name, status, url) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, obj.getName());
 			pstmt.setInt(2, obj.getStatus());
 			pstmt.setString(3, obj.getUrl());
@@ -57,7 +58,7 @@ public class AdsDaoImpl implements ClickServletDao<Ads> {
 	public boolean update(Ads obj, Connection conn) {
 		try {
 			if (conn == null || conn.isClosed()) {
-				_LOG.error("#update(?, ?): connection is null or not open!");
+				_LOG.error("#update(?, ?): kết nối null hoặc đang đóng!");
 				return false;
 			}
 			
@@ -90,7 +91,7 @@ public class AdsDaoImpl implements ClickServletDao<Ads> {
 	public boolean delete(int id, Connection conn) {
 		try {
 			if (conn == null || conn.isClosed()) {
-				_LOG.error("#delete(?, ?): connection is null or not open!");
+				_LOG.error("#delete(?, ?): kết nối null hoặc đang đóng!");
 				return false;
 			}
 			
@@ -120,7 +121,7 @@ public class AdsDaoImpl implements ClickServletDao<Ads> {
 	public Ads get(int id, Connection conn) {
 		try {
 			if (conn == null || conn.isClosed()) {
-				_LOG.error("#get(?, ?): connection is null or not open!");
+				_LOG.error("#get(?, ?): kết nối null hoặc đang đóng!");
 				return null;
 			}
 			
@@ -154,7 +155,7 @@ public class AdsDaoImpl implements ClickServletDao<Ads> {
 	public List<Ads> getAll(Connection conn) {
 		try {
 			if (conn == null || conn.isClosed()) {
-				_LOG.error("#getAll(?): connection is null or not open!");
+				_LOG.error("#getAll(?, ?): kết nối null hoặc đang đóng!");
 				return null;
 			}
 			
@@ -170,13 +171,46 @@ public class AdsDaoImpl implements ClickServletDao<Ads> {
 			
 			return allResult.isEmpty() ? null : allResult;
 		} catch (Exception e) {
-			_LOG.error("#getAll(?): " + e);
+			_LOG.error("#getAll(?, ?): " + e);
 		} finally {
 			try {
 				pstmt.close();
 				rs.close();
 			} catch (SQLException e) {
 				_LOG.error("#getAll(?, ?): " + e);
+			}
+		}
+		
+		return null;
+	}
+	
+	public List<Ads> getAllByStatus(int status, Connection conn) {
+		try {
+			if (conn == null || conn.isClosed()) {
+				_LOG.error("#getAllByStatus(?, ?): kết nối null hoặc đang đóng!");
+				return null;
+			}
+			
+			pstmt = conn.prepareStatement("SELECT id, name, status, url FROM ads WHERE status=? ORDER BY id DESC");
+			pstmt.setInt(1, status);
+			rs = pstmt.executeQuery();
+			List<Ads> allResult = new ArrayList<Ads>();
+			
+			Ads ads = null;
+			while (rs.next()) {
+				ads = new Ads(rs.getInt("id"), rs.getString("name"), rs.getInt("status"), rs.getString("url"));
+				allResult.add(ads);
+			}
+			
+			return allResult.isEmpty() ? null : allResult;
+		} catch (Exception e) {
+			_LOG.error("#getAllByStatus(?, ?): " + e);
+		} finally {
+			try {
+				pstmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				_LOG.error("#getAllByStatus(?, ?): " + e);
 			}
 		}
 		

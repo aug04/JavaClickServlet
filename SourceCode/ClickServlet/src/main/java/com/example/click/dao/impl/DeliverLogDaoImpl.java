@@ -1,16 +1,17 @@
 package com.example.click.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.example.click.dao.ClickServletDao;
 import com.example.click.entities.DeliverLog;
+import com.mysql.jdbc.Statement;
 
 public class DeliverLogDaoImpl implements ClickServletDao<DeliverLog> {
 
@@ -28,8 +29,8 @@ public class DeliverLogDaoImpl implements ClickServletDao<DeliverLog> {
 			}
 
 			pstmt = conn.prepareStatement("INSERT INTO deliver_log (date, ad_id, media_id, user_agent, "
-					+ "query_string, error_type, error_mst) VALUES (?, ?, ?, ?, ?, ?, ?)");
-			pstmt.setDate(1, new Date(obj.getDate().getTime()));
+					+ "query_string, error_type, error_msg) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			pstmt.setTimestamp(1, new Timestamp(obj.getDate().getTime()));
 			pstmt.setInt(2, obj.getAdId());
 			pstmt.setInt(3, obj.getMediaId());
 			pstmt.setString(4, obj.getUserAgent());

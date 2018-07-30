@@ -8,7 +8,7 @@
 	    </layout>
 	</appender>
 	<appender name="INFOS" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="C:/Logs/GetP12_CLI/info" />
+		<param name="File" value="${catalina.home}/logs/info" />
 		<param name="Encoding" value="UTF-8" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -20,7 +20,7 @@
 		</filter>
 	</appender>
 	<appender name="ERRORS" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="C:/Logs/GetP12_CLI/error" />
+		<param name="File" value="${catalina.home}/logs/error" />
 		<param name="Encoding" value="UTF-8" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
 		<param name="Threshold" value="ERROR" />
