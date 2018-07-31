@@ -27,7 +27,8 @@ mvn clean compile install
 Maven sẽ tiến hành download thư viện và build, sau khi BUILD SUCCESSFUL sẽ có thư mục tên "target" copy file "ad.war" trong thư mục này và paste vào thư mục "webapps" trong ${CATALINA_HOME}\webapps và sau đó vào thư mục ${CATALINA_HOME}\bin chạy file "startup.bat"
 
 Sau khi chạy xong, vào trình duyệt theo liên kết http://localhost:8080/ad ở đây sẽ có giao diện click cũng như quản lý ad và media.
-Lưu ý: để xem log, truy cập đường dẫn trong file config.properties nếu cấu hình ở phía trên đã nêu, nếu không cấu hình mặc định logs được ghi tại ${CATALINA_HOME}\logs\ad\
+- Lưu ý: để xem log, truy cập đường dẫn trong file config.properties nếu cấu hình ở phía trên đã nêu, nếu không cấu hình mặc định logs được ghi tại ${CATALINA_HOME}\logs\ad\
+- Lưu ý thêm nữa: khi build lại file "ad.war", tiến hành deploy thì nên xóa thư mục "ad" trong ${CATALINA_HOME}\webapps đi và patse đè file war, sau đó chạy tomcat như bình thường là được.
 
 ## Linux
 Để cài đặt cho linux cũng thực hiện tương tự các bước như ở windows, tuy cách cài đặt có khác nhau giữa 2 hệ điều hành.
