@@ -120,7 +120,7 @@ public class ClickServlet extends HttpServlet {
 			Ads ad = Util.getAdsFromMemoryById(adId);
 			if (ad == null) {
 				deliverLog = new DeliverLog(0, new Date(), adId, mediaId, userAgent, 
-						queryString, Constants.ErrorType.ERROR_MEDIA, "_ad = " + adId + " không tồn tại trong cơ sở dữ liệu!");
+						queryString, Constants.ErrorType.ERROR_AD, "_ad = " + adId + " không tồn tại trong cơ sở dữ liệu!");
 				_saveDeliverLog(deliverLog, conn);
 				
 				return;
