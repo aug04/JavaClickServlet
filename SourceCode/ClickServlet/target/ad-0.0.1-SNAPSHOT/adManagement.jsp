@@ -72,7 +72,7 @@
 	</table>
 	<div style="padding-top: 20px;">
 		<a href="${pageContext.request.contextPath}">Quay lại</a> | 
-		<a href="#" onclick="window.location.reload(true)">Tải lại trang</a>
+		<a href="javascript:window.location.reload(true)">Tải lại trang</a>
 	</div>
 </t:template>
 <script type="text/javascript">
@@ -107,7 +107,7 @@
 
 	// submit
 	btnSubmit.onclick = function() {
-		if (!name || !url) {
+		if (!adName || !url) {
 			alert("Vui lòng điền đầy đủ thông tin trước khi ghi lại!");
 			return false;
 		}

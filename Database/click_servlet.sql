@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2018-07-28 12:43:38
+Date: 2018-07-31 13:50:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `ads` (
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `url` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ads
@@ -34,6 +34,8 @@ INSERT INTO `ads` VALUES ('1', 'Google', '1', 'https://www.google.com');
 INSERT INTO `ads` VALUES ('2', 'Youtube', '1', 'https://www.youtube.com');
 INSERT INTO `ads` VALUES ('3', 'Facebook', '1', 'https://www.facebook.com');
 INSERT INTO `ads` VALUES ('4', 'Mp3 Zing', '1', 'https://mp3.zing.vn');
+INSERT INTO `ads` VALUES ('5', 'Shopee', '1', 'https://shopee.vn');
+INSERT INTO `ads` VALUES ('6', 'Lazada', '1', 'https://www.lazada.vn');
 
 -- ----------------------------
 -- Table structure for `deliver_log`
