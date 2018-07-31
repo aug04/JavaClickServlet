@@ -31,3 +31,6 @@ Lưu ý: để xem log, truy cập đường dẫn trong file config.properties 
 
 ## Linux
 Để cài đặt cho linux cũng thực hiện tương tự các bước như ở windows, tuy cách cài đặt có khác nhau giữa 2 hệ điều hành.
+
+## Thời gian đã sử dụng
+Em không rõ yêu cầu này lắm nhưng do bận nên mỗi hôm em làm 1 chút, mất khoảng 2 hôm, mỗi hôm làm vài tiếng.
